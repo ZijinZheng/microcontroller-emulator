@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmulatorTesting", "EmulatorTesting\EmulatorTesting.vcxproj", "{5EC042EB-7338-4D6F-9B2A-E4A84F4BD256}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmulatorCompiler", "EmulatorCompiler\EmulatorCompiler.vcxproj", "{DAB5470E-D28A-4B5A-963A-05FC58FD6DC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{5EC042EB-7338-4D6F-9B2A-E4A84F4BD256}.Debug|Win32.Build.0 = Debug|Win32
 		{5EC042EB-7338-4D6F-9B2A-E4A84F4BD256}.Release|Win32.ActiveCfg = Release|Win32
 		{5EC042EB-7338-4D6F-9B2A-E4A84F4BD256}.Release|Win32.Build.0 = Release|Win32
+		{DAB5470E-D28A-4B5A-963A-05FC58FD6DC6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DAB5470E-D28A-4B5A-963A-05FC58FD6DC6}.Debug|Win32.Build.0 = Debug|Win32
+		{DAB5470E-D28A-4B5A-963A-05FC58FD6DC6}.Release|Win32.ActiveCfg = Release|Win32
+		{DAB5470E-D28A-4B5A-963A-05FC58FD6DC6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
