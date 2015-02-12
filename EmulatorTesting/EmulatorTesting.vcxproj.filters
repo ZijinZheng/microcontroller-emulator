@@ -35,10 +35,10 @@
     <ClCompile Include="rs232.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="iRobot_program.cpp">
+    <ClCompile Include="demo_tx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo_tx.cpp">
+    <ClCompile Include="em_o.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

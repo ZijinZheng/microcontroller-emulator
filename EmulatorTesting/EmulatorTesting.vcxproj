@@ -67,7 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demo_tx.cpp" />
-    <ClCompile Include="iRobot_program.cpp" />
+    <ClCompile Include="em_o.cpp" />
     <ClCompile Include="rs232.c" />
   </ItemGroup>
   <ItemGroup>

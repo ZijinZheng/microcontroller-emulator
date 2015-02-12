@@ -6,7 +6,7 @@
 int main()
 {
 	int i = 0,
-		cport_nr = 5,
+		cport_nr = 4,
 		bdrate = 57600;       // 57600 baud
 
 	char mode[] = { '8', 'N', '1', 0 };
