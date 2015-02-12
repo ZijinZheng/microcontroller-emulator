@@ -66,13 +66,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="demo_tx.c" />
+    <ClCompile Include="demo_tx.cpp" />
+    <ClCompile Include="iRobot_program.cpp" />
     <ClCompile Include="rs232.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Emulator.h" />
+    <ClInclude Include="iRobot_program.h" />
     <ClInclude Include="OverwriteFunction.h" />
     <ClInclude Include="rs232.h" />
+    <ClInclude Include="sci.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

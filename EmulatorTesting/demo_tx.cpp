@@ -1,14 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "rs232.h"
+#include "iRobot_program.h"
 
 int main()
 {
 	int i = 0,
-		cport_nr = 2,
+		cport_nr = 5,
 		bdrate = 57600;       // 57600 baud
 
-	unsigned char mode[] = { '8', 'N', '1', 0 };
+	char mode[] = { '8', 'N', '1', 0 };
 
 	char testString[] = "139 10 255 128";
 	int byteToSent;
@@ -22,6 +23,10 @@ int main()
 	RS232_SendByte(cport_nr, 128);
 	RS232_SendByte(cport_nr, 132);
 
+	set_com_port(cport_nr);
+	iRobot_program();
+
+	/*
 	pch = strtok(testString, " ");
 	while (pch != NULL)
 	{
@@ -30,6 +35,7 @@ int main()
 		printf("%d\n", byteToSent);
 		pch = strtok(NULL, " ");
 	}
+	*/
 
 	return(0);
 }

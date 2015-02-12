@@ -24,12 +24,21 @@
     <ClInclude Include="OverwriteFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sci.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iRobot_program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="demo_tx.c">
+    <ClCompile Include="rs232.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rs232.c">
+    <ClCompile Include="iRobot_program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo_tx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
