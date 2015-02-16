@@ -17,8 +17,6 @@ int main()
 	char mode[] = { '8', 'N', '1', 0 };
 
 	char testString[] = "139 10 255 128";
-	int byteToSent;
-	char * pch;
 
 	if (RS232_OpenComport(cport_nr, bdrate, mode))
 	{

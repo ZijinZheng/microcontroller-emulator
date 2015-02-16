@@ -18,10 +18,10 @@
     <ClCompile Include="rs232.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="em_o.cpp">
+    <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="em_o.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
