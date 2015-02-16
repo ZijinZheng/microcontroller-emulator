@@ -3,10 +3,15 @@
 #include "rs232.h"
 #include "iRobot_program.h"
 
+void display_sensor_data(int interval)
+{
+
+}
+
 int main()
 {
 	int i = 0,
-		cport_nr = 4,
+		cport_nr = 3,
 		bdrate = 57600;       // 57600 baud
 
 	char mode[] = { '8', 'N', '1', 0 };
@@ -20,22 +25,16 @@ int main()
 		printf("Can not open comport\n");
 		return(0);
 	}
+
+	printf("Start\n");
 	RS232_SendByte(cport_nr, 128);
+
+	printf("Full mode\n");
 	RS232_SendByte(cport_nr, 132);
 
 	set_com_port(cport_nr);
+	
 	iRobot_program();
-
-	/*
-	pch = strtok(testString, " ");
-	while (pch != NULL)
-	{
-		byteToSent = atoi(pch);
-		RS232_SendByte(cport_nr, (unsigned char)byteToSent);
-		printf("%d\n", byteToSent);
-		pch = strtok(NULL, " ");
-	}
-	*/
 
 	return(0);
 }

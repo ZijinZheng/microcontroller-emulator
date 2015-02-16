@@ -15,31 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Emulator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rs232.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OverwriteFunction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sci.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iRobot_program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="rs232.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo_tx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="em_o.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rs232.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iRobot_program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sci.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

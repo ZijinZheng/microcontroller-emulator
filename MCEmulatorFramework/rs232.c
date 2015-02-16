@@ -419,7 +419,7 @@ void RS232_disableRTS(int comport_number)
 HANDLE Cport[16];
 
 
-char comports[17][10] = { "\\\\.\\COM0", "\\\\.\\COM1", "\\\\.\\COM2", "\\\\.\\COM3", "\\\\.\\COM4",
+char comports[16][10]={"\\\\.\\COM1",  "\\\\.\\COM2",  "\\\\.\\COM3",  "\\\\.\\COM4",
                        "\\\\.\\COM5",  "\\\\.\\COM6",  "\\\\.\\COM7",  "\\\\.\\COM8",
                        "\\\\.\\COM9",  "\\\\.\\COM10", "\\\\.\\COM11", "\\\\.\\COM12",
                        "\\\\.\\COM13", "\\\\.\\COM14", "\\\\.\\COM15", "\\\\.\\COM16"};
@@ -597,7 +597,7 @@ int RS232_SendByte(int comport_number, unsigned char byte)
   int n;
 
   WriteFile(Cport[comport_number], &byte, 1, (LPDWORD)((void *)&n), NULL);
-  printf("%d\n", byte);
+
   if(n<0)  return(1);
 
   return(0);
@@ -686,10 +686,9 @@ void RS232_disableRTS(int comport_number)
 #endif
 
 
-void RS232_cputs(int comport_number, const unsigned char *text)  /* sends a string to serial port */
+void RS232_cputs(int comport_number, const char *text)  /* sends a string to serial port */
 {
   while(*text != 0)   RS232_SendByte(comport_number, *(text++));
-
 }
 
 
