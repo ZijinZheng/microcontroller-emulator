@@ -31,6 +31,6 @@ Put your program logic inside iRobot_program(), use Visual Studio to compile and
 Zagros Robotics Roomba Mind Control Website:
 http://www.zagrosrobotics.com/shop/item.aspx?itemid=692
 
-RS-232 for Linux, FreeBSD and Windows
+RS-232 for Linux, FreeBSD and Windows:
 http://www.teuniz.net/RS-232/
 
