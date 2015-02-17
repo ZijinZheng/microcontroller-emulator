@@ -25,14 +25,9 @@ void delaySensors(uint16_t time_ms);
 
 
 
-void set_com_port(int com)
-{
-	com_port_no = com;
-}
 
 
-// Private functions
-
+/* ===== Private functions =====*/
 void read_sensor(uint8_t package)
 {
 	//printf("Sensor package=%d\n", package);
@@ -41,22 +36,43 @@ void read_sensor(uint8_t package)
 
 	//Sleep(30);
 
-	int byteRead = RS232_PollComport(com_port_no, (unsigned char*)sensors, Sen0Size);
-	printf("byteRead:%d,", byteRead);
+	int byteRead = 0;
+
+	// For Cptimeouts.ReadIntervalTimeout = 0, block until all bytes are received.
+	byteRead = RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
+
+	/*
+	// For Cptimeouts.ReadIntervalTimeout = MAXDWORD, keep reading until sensors[] is filled up.
+	while (1)
+	{
+		byteRead += RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
+		if (byteRead == Sen0Size)
+			break;
+		else
+		{
+			printf("%d bytes read, continue reading\n", byteRead);
+		}
+	}
+	*/	
+
+	printf("byteRead:%d, ", byteRead);
 	for (int i = 0; i < Sen0Size; i++)
 	{
-		printf("%d ", sensors[i]);
+		printf("%02X ", sensors[i]);
 	}
 	printf("\n");
 }
 
-// Functions for Microcontroller's C
+/* ===== Functions for Microcontroller's C ===== */
 
+// Transmit a byte over the serial port
 void byteTx(uint8_t byte)
 {
 	int byteSent = RS232_SendByte(com_port_no, byte);
-	//printf("byteSent:%d,", byteSent);
-	Sleep(20);
+	printf("byteSent:%d, %02X\n", byteSent, byte);
+
+	// Delay 10ms, otherwise some data will get lost.
+	//Sleep(10);
 }
 
 
@@ -77,6 +93,9 @@ void delaySensors(uint16_t time_ms)
 	distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
 	angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
 
+	/*
+	// Continuously check sensor data.
+	// This make cause precision issue if velocity is too small - value less than 1 will be treated as 0.
 	while ((clock() - begin) * 1000 / CLOCKS_PER_SEC  < time_ms)
 	{
 		read_sensor(0);
@@ -84,10 +103,16 @@ void delaySensors(uint16_t time_ms)
 		distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
 		angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
 	}
+	*/
 }
 
 
-/* ===== testing functions =====*/
+
+
+
+
+/* ===== Sample functions =====*/
+
 /* Periodically read from sensor
 t interval in millionsecond */
 void periodically_read_sensor(int interval)
@@ -104,38 +129,90 @@ void periodically_read_sensor(int interval)
 	}
 }
 
-void iRobot_program()
+/* Send the Roomba drive commands in terms of velocity and radius */
+void drive(int16_t velocity, int16_t radius)
 {
-	printf("Start\n");
-	byteTx(128);
+	byteTx(CmdDrive);
+	byteTx((uint8_t)((velocity >> 8) & 0x00FF));
+	byteTx((uint8_t)(velocity & 0x00FF));
+	byteTx((uint8_t)((radius >> 8) & 0x00FF));
+	byteTx((uint8_t)(radius & 0x00FF));
+}
 
-	printf("Full mode\n");
-	byteTx(132);
-
-	printf("Drive 50, RadStraight\n");
-	byteTx(137);
-	byteTx(0);
-	byteTx(100);
-	byteTx(0);
-	byteTx(1);
-	//byteTx(RadStraight);	
-
+/* Rotate at place, positive velocity for counterclockwise. */
+void rotate(int16_t velocity, int16_t dest_angle)
+{
+	drive(velocity, 1);
 	angle = 0;
 	while (1)
-	{		
+	{
 		delaySensors(30);
-		printf("distance: %d\n", angle);
-		if (angle > 90)
+		printf("angle: %d\n", angle);
+		if (angle >= dest_angle || angle <= -dest_angle)
 		{
-			byteTx(137);
-			byteTx(00);
-			byteTx(0);
-			byteTx(0x7F);
-			byteTx(0xFF);
+			drive(0, 1);
 			break;
 		}
 	}
+}
 
+/* Move in line, positive velocity for forward. */
+void move(int16_t velocity, int16_t dest_distance)
+{
+	drive(velocity, RadStraight);
+	distance = 0;
+	while (1)
+	{
+		delaySensors(30);
+		printf("distance: %d\n", distance);
+		if (distance >= dest_distance)
+		{
+			drive(0, RadStraight);
+			break;
+		}
+	}
+}
+
+void led(uint8_t bits, uint8_t color, uint8_t intensity)
+{
+	byteTx(CmdLeds);
+	byteTx(bits);
+	byteTx(color);
+	byteTx(intensity);
+}
+
+
+
+
+
+/* ===== Public functions =====*/
+
+void set_com_port(int com)
+{
+	com_port_no = com;
+}
+
+
+void iRobot_program()
+{
+	// Initialize
+
+	printf("Start\n");
+	byteTx(CmdStart);
+
+	printf("Full mode\n");
+	byteTx(CmdFull);
+
+	delay(100);
+	// Commands
+
+	drive(10, RadStraight);
+
+	// rotate(-80, 90);
+
+	led(10, 255, 255);
+
+	//move(300, 300);
 
 	//periodically_read_sensor(1000);
 

@@ -562,7 +562,7 @@ http://technet.microsoft.com/en-us/library/cc732236.aspx
 
   COMMTIMEOUTS Cptimeouts;
 
-  Cptimeouts.ReadIntervalTimeout         = MAXDWORD;
+  Cptimeouts.ReadIntervalTimeout         = 0;	// Do not use MAXDWORD, or ReadFile may return without data
   Cptimeouts.ReadTotalTimeoutMultiplier  = 0;
   Cptimeouts.ReadTotalTimeoutConstant    = 0;
   Cptimeouts.WriteTotalTimeoutMultiplier = 0;
@@ -579,7 +579,7 @@ http://technet.microsoft.com/en-us/library/cc732236.aspx
 }
 
 
-int RS232_PollComport(int comport_number, unsigned char *buf, int size)
+int RS232_ReadBuf(int comport_number, unsigned char *buf, int size)
 {
   int n;
 
@@ -609,8 +609,6 @@ int RS232_SendByte(int comport_number, unsigned char byte)
   int n;
 
   WriteFile(Cport[comport_number], &byte, 1, (LPDWORD)((void *)&n), NULL);
-
-  if(n<0)  return(1);
 
   return(n);
 }
