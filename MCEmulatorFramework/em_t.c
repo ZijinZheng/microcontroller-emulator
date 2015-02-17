@@ -24,12 +24,6 @@ void delay(uint16_t time_ms);
 void delaySensors(uint16_t time_ms);
 
 
-uint8_t RS232_ReadByte()
-{
-	RS232_PollComport(com_port_no, (unsigned char*)&read_buf, 1);
-	return read_buf;
-}
-
 
 void set_com_port(int com)
 {
@@ -41,17 +35,28 @@ void set_com_port(int com)
 
 void read_sensor(uint8_t package)
 {
+	//printf("Sensor package=%d\n", package);
 	byteTx(CmdSensors);
 	byteTx(package);
 
-	RS232_PollComport(com_port_no, (unsigned char*)sensors, Sen0Size);
+	//Sleep(30);
+
+	int byteRead = RS232_PollComport(com_port_no, (unsigned char*)sensors, Sen0Size);
+	printf("byteRead:%d,", byteRead);
+	for (int i = 0; i < Sen0Size; i++)
+	{
+		printf("%d ", sensors[i]);
+	}
+	printf("\n");
 }
 
 // Functions for Microcontroller's C
 
 void byteTx(uint8_t byte)
 {
-	RS232_SendByte(com_port_no, byte);
+	int byteSent = RS232_SendByte(com_port_no, byte);
+	//printf("byteSent:%d,", byteSent);
+	Sleep(20);
 }
 
 
@@ -66,13 +71,18 @@ void delay(uint16_t time_ms)
 void delaySensors(uint16_t time_ms)
 {
 	clock_t begin = clock();
-	while ((clock() - begin) / CLOCKS_PER_SEC < time_ms)
+	Sleep(time_ms);
+	read_sensor(0);
+	// Update running totals of distance and angle
+	distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
+	angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
+
+	while ((clock() - begin) * 1000 / CLOCKS_PER_SEC  < time_ms)
 	{
 		read_sensor(0);
-
 		// Update running totals of distance and angle
-		distance += (int)((sensors[SenDist1] << 8) | sensors[SenDist0]);
-		angle += (int)((sensors[SenAng1] << 8) | sensors[SenAng0]);
+		distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
+		angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
 	}
 }
 
@@ -96,7 +106,38 @@ void periodically_read_sensor(int interval)
 
 void iRobot_program()
 {
-	periodically_read_sensor(1000);
+	printf("Start\n");
+	byteTx(128);
+
+	printf("Full mode\n");
+	byteTx(132);
+
+	printf("Drive 50, RadStraight\n");
+	byteTx(137);
+	byteTx(0);
+	byteTx(100);
+	byteTx(0);
+	byteTx(1);
+	//byteTx(RadStraight);	
+
+	angle = 0;
+	while (1)
+	{		
+		delaySensors(30);
+		printf("distance: %d\n", angle);
+		if (angle > 90)
+		{
+			byteTx(137);
+			byteTx(00);
+			byteTx(0);
+			byteTx(0x7F);
+			byteTx(0xFF);
+			break;
+		}
+	}
+
+
+	//periodically_read_sensor(1000);
 
 
 }

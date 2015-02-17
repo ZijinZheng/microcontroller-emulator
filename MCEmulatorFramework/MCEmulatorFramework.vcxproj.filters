@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="rs232.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="em_o.c">
+    <ClCompile Include="em_t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rs232_m.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

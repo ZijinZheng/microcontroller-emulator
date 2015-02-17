@@ -12,8 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="em_o.c" />
-    <ClCompile Include="rs232.c" />
+    <ClCompile Include="em_t.c" />
+    <ClCompile Include="rs232_m.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="iRobot_program.h" />

@@ -16,23 +16,16 @@ int main()
 
 	char mode[] = { '8', 'N', '1', 0 };
 
-	char testString[] = "139 10 255 128";
-
 	if (RS232_OpenComport(cport_nr, bdrate, mode))
 	{
 		printf("Can not open comport\n");
 		return(0);
-	}
-
-	printf("Start\n");
-	RS232_SendByte(cport_nr, 128);
-
-	printf("Full mode\n");
-	RS232_SendByte(cport_nr, 132);
+	}	
 
 	set_com_port(cport_nr);
 	
 	iRobot_program();
+	RS232_CloseComport(cport_nr);
 
 	return(0);
 }
