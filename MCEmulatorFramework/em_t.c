@@ -22,46 +22,8 @@ volatile uint8_t read_buf;
 void byteTx(uint8_t byte);
 void delay(uint16_t time_ms);
 void delaySensors(uint16_t time_ms);
+void readSensor(uint8_t package);
 
-
-
-
-
-/* ===== Private functions =====*/
-void read_sensor(uint8_t package)
-{
-	//printf("Sensor package=%d\n", package);
-	byteTx(CmdSensors);
-	byteTx(package);
-
-	//Sleep(30);
-
-	int byteRead = 0;
-
-	// For Cptimeouts.ReadIntervalTimeout = 0, block until all bytes are received.
-	byteRead = RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
-
-	/*
-	// For Cptimeouts.ReadIntervalTimeout = MAXDWORD, keep reading until sensors[] is filled up.
-	while (1)
-	{
-		byteRead += RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
-		if (byteRead == Sen0Size)
-			break;
-		else
-		{
-			printf("%d bytes read, continue reading\n", byteRead);
-		}
-	}
-	*/	
-
-	printf("byteRead:%d, ", byteRead);
-	for (int i = 0; i < Sen0Size; i++)
-	{
-		printf("%02X ", sensors[i]);
-	}
-	printf("\n");
-}
 
 /* ===== Functions for Microcontroller's C ===== */
 
@@ -83,12 +45,48 @@ void delay(uint16_t time_ms)
 }
 
 
+/* Read sensor data to sensors[] */
+void readSensor(uint8_t package)
+{
+	//printf("Sensor package=%d\n", package);
+	byteTx(CmdSensors);
+	byteTx(package);
+
+	//Sleep(30);
+
+	int byteRead = 0;
+
+	// For Cptimeouts.ReadIntervalTimeout = 0, block until all bytes are received.
+	byteRead = RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
+
+	/*
+	// For Cptimeouts.ReadIntervalTimeout = MAXDWORD, keep reading until sensors[] is filled up.
+	while (1)
+	{
+	byteRead += RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
+	if (byteRead == Sen0Size)
+	break;
+	else
+	{
+	printf("%d bytes read, continue reading\n", byteRead);
+	}
+	}
+	*/
+
+	printf("byteRead:%d, ", byteRead);
+	for (int i = 0; i < Sen0Size; i++)
+	{
+		printf("%02X ", sensors[i]);
+	}
+	printf("\n");
+}
+
 // Delay for the specified time in ms and update sensor values
 void delaySensors(uint16_t time_ms)
 {
 	clock_t begin = clock();
 	Sleep(time_ms);
-	read_sensor(0);
+	readSensor(0);
 	// Update running totals of distance and angle
 	distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
 	angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
@@ -98,7 +96,7 @@ void delaySensors(uint16_t time_ms)
 	// This make cause precision issue if velocity is too small - value less than 1 will be treated as 0.
 	while ((clock() - begin) * 1000 / CLOCKS_PER_SEC  < time_ms)
 	{
-		read_sensor(0);
+		readSensor(0);
 		// Update running totals of distance and angle
 		distance += (int16_t)((sensors[SenDist1] << 8) | sensors[SenDist0]);
 		angle += (int16_t)((sensors[SenAng1] << 8) | sensors[SenAng0]);
@@ -111,7 +109,7 @@ void delaySensors(uint16_t time_ms)
 
 
 
-/* ===== Sample functions =====*/
+/* ===== Sample functions ===== */
 
 /* Periodically read from sensor
 t interval in millionsecond */
@@ -119,7 +117,7 @@ void periodically_read_sensor(int interval)
 {
 	while (1)
 	{
-		read_sensor(0);
+		readSensor(0);
 		for (int i = 0; i < Sen0Size; i++)
 		{
 			printf("%d ", sensors[i]);
@@ -187,7 +185,7 @@ void led(uint8_t bits, uint8_t color, uint8_t intensity)
 
 /* ===== Public functions =====*/
 
-void set_com_port(int com)
+void setComPort(int com)
 {
 	com_port_no = com;
 }
@@ -215,6 +213,8 @@ void iRobot_program()
 	//move(300, 300);
 
 	//periodically_read_sensor(1000);
+
+	/** main program **/
 
 
 }

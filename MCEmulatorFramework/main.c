@@ -22,7 +22,7 @@ int main()
 		return(0);
 	}	
 
-	set_com_port(cport_nr);
+	setComPort(cport_nr);
 	
 	iRobot_program();
 	RS232_CloseComport(cport_nr);
