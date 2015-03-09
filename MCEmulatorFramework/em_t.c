@@ -57,7 +57,8 @@ void readSensor(uint8_t package)
 	int byteRead = 0;
 
 	// For Cptimeouts.ReadIntervalTimeout = 0, block until all bytes are received.
-	byteRead = RS232_ReadBuf(com_port_no, (unsigned char*)sensors + byteRead, Sen0Size - byteRead);
+	byteRead = RS232_ReadBuf(com_port_no, (unsigned char*)sensors, Sen0Size);
+	printf("error: only %d bytes read. ", byteRead);
 
 	/*
 	// For Cptimeouts.ReadIntervalTimeout = MAXDWORD, keep reading until sensors[] is filled up.
@@ -84,7 +85,7 @@ void readSensor(uint8_t package)
 // Delay for the specified time in ms and update sensor values
 void delaySensors(uint16_t time_ms)
 {
-	clock_t begin = clock();
+	// clock_t begin = clock();
 	Sleep(time_ms);
 	readSensor(0);
 	// Update running totals of distance and angle
