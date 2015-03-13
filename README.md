@@ -1,5 +1,13 @@
 # MCEmulator
+
 iRobot Roomba/Create Zagros Robotics Mind Control Emulator
+
+This project is for USC CSCI-577 Mission Science iRobots. 
+It emulates the Zagros Robotics Mind Control environment on a PC with simple modification of C source code.
+It's just like making your PC act as a Mind Control and communicate with iRobot through COM port.
+Put your program logic inside iRobot_program(), use Visual Studio to compile and have fun!
+
+## License
 
 Author: Jiashuo Li
 
@@ -18,15 +26,7 @@ Author: Jiashuo Li
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
-This project is for USC CSCI-577 Mission Science iRobots. 
-It emulates the Zagros Robotics Mind Control environment on a PC with simple modification of C source code.
-It's just like making your PC act as a Mind Control and communicate with iRobot through COM port.
-Put your program logic inside iRobot_program(), use Visual Studio to compile and have fun!
-
-
-
+## Links
 
 Zagros Robotics Roomba Mind Control Website:
 http://www.zagrosrobotics.com/shop/item.aspx?itemid=692
