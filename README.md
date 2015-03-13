@@ -1,5 +1,7 @@
 # MCEmulator
 
+## Introduction
+
 iRobot Roomba/Create Zagros Robotics Mind Control Emulator
 
 This project is for USC CSCI-577 Mission Science iRobots. 
