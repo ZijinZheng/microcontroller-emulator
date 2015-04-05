@@ -23,7 +23,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F26B7D94-9950-406C-81A3-667697490104}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MCEmulatorFramework</RootNamespace>
+    <RootNamespace>MCEmulator</RootNamespace>
+    <ProjectName>MCEmulator</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

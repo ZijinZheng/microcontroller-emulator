@@ -13,7 +13,8 @@ int main()
 
 	if (RS232_OpenComport(cport_nr, bdrate, mode))
 	{
-		printf("Can not open comport\n");
+		printf("An error happened.\n");
+		system("pause");
 		return(0);
 	}	
 
