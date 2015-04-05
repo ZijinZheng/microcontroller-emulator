@@ -562,7 +562,7 @@ http://technet.microsoft.com/en-us/library/cc732236.aspx
 
   COMMTIMEOUTS Cptimeouts;
 
-  Cptimeouts.ReadIntervalTimeout         = 0;	// Do not use MAXDWORD, or ReadFile may return without data
+  Cptimeouts.ReadIntervalTimeout         = 0;	// Do not use MAXDWORD, otherwise ReadFile may return without data
   Cptimeouts.ReadTotalTimeoutMultiplier  = 0;
   Cptimeouts.ReadTotalTimeoutConstant    = 0;
   Cptimeouts.WriteTotalTimeoutMultiplier = 0;

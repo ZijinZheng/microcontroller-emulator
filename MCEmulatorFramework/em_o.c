@@ -205,6 +205,13 @@ void iRobot_program()
 	delay(100);
 	// Commands	
 
-/**main_program**/
+//DRIVE 1,1
+byteTx(CmdDrive);
+byteTx(0);
+byteTx(1);
+byteTx(0);
+byteTx(1);
+
+
 
 }

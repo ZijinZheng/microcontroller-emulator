@@ -3,11 +3,6 @@
 #include "rs232.h"
 #include "iRobot_program.h"
 
-void display_sensor_data(int interval)
-{
-
-}
-
 int main()
 {
 	int i = 0,
