@@ -205,12 +205,56 @@ void iRobot_program()
 	delay(100);
 	// Commands	
 
-//DRIVE 1,1
-byteTx(CmdDrive);
+//LED 10,255,255
+byteTx(CmdLeds);
+byteTx(10);
+byteTx(255);
+byteTx(255);
+
+//SONG 72,32,72,32,79,32,79,32,81,32,81,32,79,64,77,32,77,32,76,32,76,32,74,32,74,32,72,64
+byteTx(CmdSong);
 byteTx(0);
-byteTx(1);
+byteTx(14);
+byteTx(72);
+byteTx(32);
+byteTx(72);
+byteTx(32);
+byteTx(79);
+byteTx(32);
+byteTx(79);
+byteTx(32);
+byteTx(81);
+byteTx(32);
+byteTx(81);
+byteTx(32);
+byteTx(79);
+byteTx(64);
+byteTx(77);
+byteTx(32);
+byteTx(77);
+byteTx(32);
+byteTx(76);
+byteTx(32);
+byteTx(76);
+byteTx(32);
+byteTx(74);
+byteTx(32);
+byteTx(74);
+byteTx(32);
+byteTx(72);
+byteTx(64);
+byteTx(CmdPlay);
 byteTx(0);
-byteTx(1);
+
+
+//DELAY 5000
+delay(5000);
+
+//LED 0,0,255
+byteTx(CmdLeds);
+byteTx(0);
+byteTx(0);
+byteTx(255);
 
 
 

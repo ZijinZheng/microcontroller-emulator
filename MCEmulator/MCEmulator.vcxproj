@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="em_o.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="em_t.c" />
     <ClCompile Include="rs232_m.c" />
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,14 @@
 
 int main()
 {
+	/*
+	iRobot Serial Port Settings
+	Baud: 57600 or 19200 (see below)
+	Data bits: 8
+	Parity: None
+	Stop bits: 1
+	Flow control: None	
+	*/
 	int i = 0,
 		cport_nr = 3,
 		bdrate = 57600;       // 57600 baud
