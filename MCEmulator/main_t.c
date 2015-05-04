@@ -18,7 +18,7 @@ int main()
 		bdrate = 57600;       // 57600 baud
 
 	// Change the com port
-	cport_nr = 3;
+	cport_nr = /**change_com_port**/;
 	
 	char mode[] = { '8', 'N', '1', 0 };
 
