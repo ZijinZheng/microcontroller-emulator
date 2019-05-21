@@ -1,6 +1,4 @@
-# MCEmulator
-
-iRobot Roomba/Create Zagros Robotics Mind Control Emulator.
+# iRobot Roomba/Create Zagros Robotics Mind Control Emulator.
 
 ## Introduction
 
